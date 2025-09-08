@@ -10,12 +10,14 @@ const SignUpForm = () => {
   const { setUser } = useContext(UserContext);
   const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
+    firstName: "",
+    lastName: "",
     password: '',
     passwordConf: '',
   });
 
-  const { username, password, passwordConf } = formData;
+  const { email, firstName, lastName, password, passwordConf } = formData;
 
   const handleChange = (evt) => {
     setMessage('');
@@ -26,6 +28,7 @@ const SignUpForm = () => {
     evt.preventDefault();
     try {
       const newUser = await signUp(formData);
+      console.log("New user", newUser)
       setUser(newUser);
       navigate('/');
     } catch (err) {
@@ -34,7 +37,7 @@ const SignUpForm = () => {
   };
 
   const isFormInvalid = () => {
-    return !(username && password && password === passwordConf);
+    return !(email && password && password === passwordConf);
   };
 
   return (
@@ -43,14 +46,36 @@ const SignUpForm = () => {
       <p>{message}</p>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor='username'>Username:</label>
+          <label htmlFor='email'>Email:</label>
           <input
             type='text'
-            id='name'
-            value={username}
-            name='username'
+            id='email'
+            value={email}
+            name='email'
             onChange={handleChange}
             required
+          />
+        </div>
+        <div>
+          <label htmlFor="firstName">First Name:</label>
+          <input 
+          type="text"
+          id='firstName'
+          name='firstName'
+          value={firstName}
+          onChange={handleChange}
+          required
+          />
+        </div>
+        <div>
+        <label htmlFor="lastName">Last Name:</label>
+          <input 
+          type="text"
+          id='lastName'
+          name='lastName'
+          value={lastName}
+          onChange={handleChange}
+          required
           />
         </div>
         <div>
