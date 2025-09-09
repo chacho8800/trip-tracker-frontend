@@ -6,9 +6,17 @@ import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
 import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
+
+import Trips from './components/Trips/Trips';
+import TripsForm from './components/Trips/TripsForm';
+import TripsDetails from './components/Trips/TripsDetails';
+import TripsEdit from './components/Trips/TripsEdit';
+import TripsReview from './components/Trips/TripsReview';
+
 import AttractionList from './components/Attractions/attractionList.jsx';
 import AttractionDetails from './components/Attractions/AttractionDetails.jsx';
 import AttractionForm from './components/Attractions/AttractionForm.jsx';
+
 
 
 import { UserContext } from './contexts/UserContext';
@@ -20,11 +28,19 @@ const App = () => {
   return (
     <>
       <NavBar/>
+
+
+      
       <Routes>
         <Route path='/' element={user ? <Dashboard /> : <Landing />} />
-        {user ? (
-          <>
-          <Route
+
+        {user ? (<>
+        <Route path='/trips' element={<Trips />} />
+        <Route path='/trips/new' element={<TripsForm />} />
+        <Route path='/trips/:tripId' element={<TripsDetails />} />
+        <Route path='/trips/:tripId/edit' element={<TripsEdit />} />
+        <Route path='/trips/:tripId/reviews' element={<TripsReview />} />
+                    <Route
             path="/destinations/:destinationId/attractions/"
             element={<AttractionList />}
           />
@@ -38,13 +54,14 @@ const App = () => {
             path="/destinations/:destinationId/attractions/:attractionId"
             element={<AttractionDetails />}
           />
-          </>
+ </>
         ) : (
           <>
-          <Route path='/sign-up' element={<SignUpForm />} />
-          <Route path='/sign-in' element={<SignInForm />} />
-          </>
-        )}
+        <Route path='/sign-up' element={<SignUpForm />} />
+        <Route path='/sign-in' element={<SignInForm />} />   
+        </>
+        ) }
+
       </Routes>
     </>
   );
