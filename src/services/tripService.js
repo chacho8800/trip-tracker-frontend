@@ -1,90 +1,136 @@
-import axios from "axios";
 
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/trips`;
 
-
-
 // Create a new trip
-export async function create(tripData) {
+const  create = async (tripData) =>  {
   try {
-    const response = await axios.post(BASE_URL, tripData, {
+    const response = await fetch(BASE_URL,{
+      method: "POST",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json"
       },
+      body: JSON.stringify(tripData)
     });
-    return response.data;
+    
+    const data = await response.json()
+
+    if(data.err) throw new Error(data.err)
+
+    return data
+
   } catch (error) {
-    throw error.response ? error.response.data : error;
+    console.log(error)
+    throw new Error
   }
 }
 
 // Get all trips
 export async function getAll() {
   try {
-    const response = await axios.get(BASE_URL, {
+    const response = await fetch(BASE_URL, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     })
-    return response.data
+    const data = await response.json()
+
+    if(data.err) throw new Error(data.err)
+
+    return data
+
   } catch (error) {
-    throw error.response ? error.response.data : error
+    console.log(error)
+    throw new Error
   }
 }
 
 // Get a single trip by id
 export async function getById(tripId) {
   try {
-    const response = await axios.get(`${BASE_URL}/${tripId}`, {
+    const response = await fetch(`${BASE_URL}/${tripId}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    return response.data;
+    const data = await response.json()
+
+    if(data.err) throw new Error(data.err)
+
+    return data
+
   } catch (error) {
-    throw error.response ? error.response.data : error;
+    console.log(error)
+    throw new Error
   }
 }
 
 // Update a trip
-export async function update(id, tripData) {
+const update = async (id, tripData) => {
   try {
-    const response = await axios.put(`${BASE_URL}/${id}`, tripData, {
+    const response = await fetch(`${BASE_URL}/${id}`, {
+      method: "PUT",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
+      body: JSON.stringify(tripData)
     })
-    return response.data
+    const data = await response.json()
+
+    if(data.err) throw new Error(data.err)
+
+    return data
+
   } catch (error) {
-    throw error.response ? error.response.data : error
+    console.log(error)
+    throw new Error
   }
 }
 
 // Delete a trip
 export async function remove(id) {
   try {
-    const response = await axios.delete(`${BASE_URL}/${id}`, {
+    const response = await fetch(`${BASE_URL}/${id}`, {
+      method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     })
-    return response.data
+    const data = await response.json()
+
+    if(data.err) throw new Error(data.err)
+
+    return data
+
   } catch (error) {
-    throw error.response ? error.response.data : error
+    console.log(error)
+    throw new Error
   }
 }
 
 export async function addReview(tripId, reviewData) {
   try {
-    const response = await axios.post(`${BASE_URL}/${tripId}/reviews`, reviewData, {
+    const response = await fetch(`${BASE_URL}/${tripId}/reviews`, {
+      method: "POST",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
+      body: JSON.stringify(reviewData)
     });
-    return response.data;
-  } catch (err) {
-    console.error("Review submission error:", err.response || err);
-    throw err.response ? err.response.data : err;
+    const data = await response.json()
+
+    if(data.err) throw new Error(data.err)
+
+    return data
+
+  } catch (error) {
+    console.log(error)
+    throw new Error
   }
+}
+
+export {
+  create,
+  update,
 }

@@ -5,16 +5,13 @@ import DestinationDetails from './components/Destination/DestinationDetails';
 import DestinationForm from './components/Destination/DestinationForm';
 import DestinationList from './components/Destination/DestinationList';
 
-import { useContext, useEffect, useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router';
-
 import NavBar from './components/NavBar/NavBar';
 import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
 import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 
-import Trips from './components/Trips/Trips';
+import TripsDashboard from './components/Trips/TripsDashboard.jsx';
 import TripsForm from './components/Trips/TripsForm';
 import TripsDetails from './components/Trips/TripsDetails';
 import TripsEdit from './components/Trips/TripsEdit';
@@ -39,7 +36,7 @@ const App = () => {
         <Route path='/' element={user ? <Dashboard /> : <Landing />} />
 
         {user ? (<>
-        <Route path='/trips' element={<Trips />} />
+        <Route path='/trips' element={<TripsDashboard />} />
         <Route path='/trips/new' element={<TripsForm />} />
         <Route path='/trips/:tripId' element={<TripsDetails />} />
         <Route path='/trips/:tripId/edit' element={<TripsEdit />} />

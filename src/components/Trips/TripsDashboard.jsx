@@ -19,6 +19,7 @@ const TripsDashboard = () => {
       try {
         const fetchedTrips = await tripService.getAll(); // fetch all trips, not getById
         setTrips(fetchedTrips);
+        console.log(fetchedTrips)
       } catch (err) {
         console.log(err);
       }
@@ -36,16 +37,21 @@ const TripsDashboard = () => {
         Add New Trip
       </button>
       <ul>
-        {trips.map((trip) => (
-          <li key={trip._id}>
-            <button onClick={() => handleViewTrip(trip._id)}>
-              <strong>Travelers:</strong> {trip.travelers} | <strong>Duration:</strong> {trip.trip_duration} days
-            </button>
-            {/* <Link to={`/trips/${tripid}`}>
-              {attraction.name} — Posted by {user.firstName} {user.lastName}
-            </Link> */}
-          </li>
-        ))}
+        {trips.length === 0 ? (
+          <p>No Trips in Dashboard</p>
+        ) : (
+          trips.map((trip) => (
+            <li key={trip._id}>
+              <button onClick={() => handleViewTrip(trip._id)}>
+                <strong>Travelers:</strong> {trip.travelers} | <strong>Duration:</strong> {trip.trip_duration} days
+              </button>
+              {/* <Link to={`/trips/${tripid}`}>
+                {attraction.name} — Posted by {user.firstName} {user.lastName}
+              </Link> */}
+            </li>
+          ))
+          
+        )}
       </ul>
     </main>
   );

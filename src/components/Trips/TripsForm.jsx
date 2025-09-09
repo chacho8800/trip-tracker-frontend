@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 
-import { create } from '../../services/tripService';
+import * as tripService from "../../services/tripService.js"
 
 import { UserContext } from '../../contexts/UserContext';
 
@@ -23,17 +23,32 @@ const TripsForm = () => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
 
-  const handleSubmit = async (evt) => {
-    evt.preventDefault();
-    try {
-      const newTrip = await create(formData);
-      console.log("New trip", newTrip);
-      setTrips([newTrip, ...trips]);
-      navigate('/trips');
-    } catch (err) {
-      setMessage(err.message);
-    }
-  };
+  // const handleSubmit = async (evt) => {
+  //   evt.preventDefault();
+  //   try {
+  //     const newTrip = await tripService.create(formData);
+  //     console.log("New trip", newTrip);
+  //     setTrips([newTrip, ...trips]);
+  //     navigate('/trips');
+  //   } catch (err) {
+  //     setMessage(err.message);
+  //   }
+  // };
+
+      const handleAddTrip = async (tripFormData) => {
+          const newTrip = await tripService.create(tripFormData)
+          setTrips([newTrip, ...trips]);
+  
+          console.log("Trips Form Data", newTrip)
+          navigate(`/trips`)
+      }
+  
+      const handleSubmit = (event) => {
+          event.preventDefault()
+  
+          handleAddTrip(formData)
+          console.log("Form Data", formData)
+      }
 
   return (
     <main>
@@ -54,7 +69,7 @@ const TripsForm = () => {
         <div>
           <label htmlFor="trip_duration">Trip Duration:</label>
           <input 
-          type="number"
+          type="text"
           id='trip_duration'
           name='trip_duration'
           value={trip_duration}

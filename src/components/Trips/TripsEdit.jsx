@@ -5,7 +5,7 @@ import * as tripService from '../../services/tripService';
 const EditTripForm = () => {
   const { tripId } = useParams();
   const navigate = useNavigate();
-
+  const [trips, setTrips] = useState([]);
   const [formData, setFormData] = useState({
     travelers: '',
     trip_duration: '',
@@ -39,7 +39,11 @@ const EditTripForm = () => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     try {
-      await tripService.update(tripId, formData);
+      const updatedTrip = await tripService.update(tripId, formData);
+      console.log("Updating Form Data", formData)
+      setTrips([updatedTrip, ...trips])
+      // stop from here ......
+      
       navigate(`/trips/${tripId}`); // redirect to trip details after update
     } catch (err) {
       console.error(err);
