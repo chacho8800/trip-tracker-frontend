@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 import { Routes, Route } from 'react-router';
-
+import DestinationDetails from './components/Destination/DestinationDetails';
+import DestinationForm from './components/Destination/DestinationForm';
+import DestinationList from './components/Destination/DestinationList';
 import NavBar from './components/NavBar/NavBar';
 import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
@@ -14,12 +16,32 @@ const App = () => {
   
   return (
     <>
-      <NavBar/>
+  <NavBar/>
       <Routes>
         <Route path='/' element={user ? <Dashboard /> : <Landing />} />
-        <Route path='/sign-up' element={<SignUpForm />} />
-        <Route path='/sign-in' element={<SignInForm />} />
+        {user ? (
+          <>
+          <Route
+            path="/:tripId/destinations"
+            element={<DestinationList />}
+          />
+          <Route
+            path="/:tripId/destinations/new"
+            element={<DestinationForm />}
+          />
+          <Route
+            path="/:tripId/destinations/:destinationId/"
+            element={<DestinationDetails />}
+          />
+          </>
+        ) : (
+          <>
+          <Route path='/sign-up' element={<SignUpForm />} />
+          <Route path='/sign-in' element={<SignInForm />} />
+          </>
+        )}
       </Routes>
+
     </>
   );
 };
