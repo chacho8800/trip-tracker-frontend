@@ -1,6 +1,6 @@
 
 import { useContext } from 'react';
-import { Routes, Route } from 'react-router';
+import { Routes, Route, useParams } from 'react-router';
 import DestinationDetails from './components/Destination/DestinationDetails';
 import DestinationForm from './components/Destination/DestinationForm';
 import DestinationList from './components/Destination/DestinationList';
@@ -17,7 +17,7 @@ import TripsDetails from './components/Trips/TripsDetails';
 import TripsEdit from './components/Trips/TripsEdit';
 import TripsReview from './components/Trips/TripsReview';
 
-import AttractionList from './components/Attractions/attractionList.jsx';
+import AttractionList from './components/Attractions/AttractionList.jsx';
 import AttractionDetails from './components/Attractions/AttractionDetails.jsx';
 import AttractionForm from './components/Attractions/AttractionForm.jsx';
 
@@ -27,7 +27,7 @@ import { UserContext } from './contexts/UserContext';
 
 const App = () => {
   const { user } = useContext(UserContext);
-
+ const {tripId} = useParams();
   
   return (
     <>
