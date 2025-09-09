@@ -1,19 +1,20 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 
+import { create } from '../../services/tripService';
+
 import { UserContext } from '../../contexts/UserContext';
 
 const TripsForm = () => {
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
-  const [Trips, setTrips] = useState([]);
   const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     travelers: '',
-    trip_duration: "",
-    startDate: "",
+    trip_duration: '',
+    startDate: '',
     endDate: '',
   });
+  const [trips, setTrips] = useState([]);
 
   const { travelers, trip_duration, startDate, endDate } = formData;
 
@@ -26,8 +27,8 @@ const TripsForm = () => {
     evt.preventDefault();
     try {
       const newTrip = await create(formData);
-      console.log("New trip", newTrip)
-      setTrips(newTrip);
+      console.log("New trip", newTrip);
+      setTrips([newTrip, ...trips]);
       navigate('/trips');
     } catch (err) {
       setMessage(err.message);
@@ -36,11 +37,11 @@ const TripsForm = () => {
 
   return (
     <main>
-      <h1>New Trip</h1>
+      <h1>Add a New Trip!</h1>
       <p>{message}</p>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor='travelers'>Travelers:</label>
+          <label htmlFor='travelers'>Trip Name:</label>
           <input
             type='text'
             id='travelers'
@@ -53,7 +54,7 @@ const TripsForm = () => {
         <div>
           <label htmlFor="trip_duration">Trip Duration:</label>
           <input 
-          type="text"
+          type="number"
           id='trip_duration'
           name='trip_duration'
           value={trip_duration}
@@ -64,7 +65,7 @@ const TripsForm = () => {
         <div>
         <label htmlFor="startDate">Start Date:</label>
           <input 
-          type="text"
+          type="date"
           id='startDate'
           name='startDate'
           value={startDate}
@@ -75,7 +76,7 @@ const TripsForm = () => {
         <div>
           <label htmlFor='endDate'>End Date:</label>
           <input
-            type='endDate'
+            type='date'
             id='endDate'
             value={endDate}
             name='endDate'
@@ -84,8 +85,8 @@ const TripsForm = () => {
           />
         </div>
         <div>
-          <button>Create Trip</button>
-          <button onClick={() => navigate('/trips')}>Cancel</button>
+          <button type="submit">Create Trip</button>
+          <button type="button" onClick={() => navigate('/')}>Cancel</button>
         </div>
       </form>
     </main>
