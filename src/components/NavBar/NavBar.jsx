@@ -20,6 +20,7 @@ const NavBar = () => {
           <li>Welcome, {user.firstName}</li>
           <li><Link to="/">Dashboard</Link></li>
           <li><Link to='/trips'>Trips</Link></li>
+          <li><Link to='/:tripId/destinations'>Destination</Link></li>
           <li><Link to={`/destinations/:destinationId/attractions`}>Attractions</Link></li>
           <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
         </ul>

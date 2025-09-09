@@ -1,3 +1,10 @@
+
+import { useContext } from 'react';
+import { Routes, Route } from 'react-router';
+import DestinationDetails from './components/Destination/DestinationDetails';
+import DestinationForm from './components/Destination/DestinationForm';
+import DestinationList from './components/Destination/DestinationList';
+
 import { useContext, useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router';
 
@@ -27,10 +34,7 @@ const App = () => {
   
   return (
     <>
-      <NavBar/>
-
-
-      
+     <NavBar/>
       <Routes>
         <Route path='/' element={user ? <Dashboard /> : <Landing />} />
 
@@ -40,7 +44,22 @@ const App = () => {
         <Route path='/trips/:tripId' element={<TripsDetails />} />
         <Route path='/trips/:tripId/edit' element={<TripsEdit />} />
         <Route path='/trips/:tripId/reviews' element={<TripsReview />} />
-                    <Route
+          <Route
+            path="/:tripId/destinations"
+            element={<DestinationList />}
+          />
+              
+          <Route
+            path="/:tripId/destinations/new"
+            element={<DestinationForm />}
+          />
+              
+          <Route
+            path="/:tripId/destinations/:destinationId/"
+            element={<DestinationDetails />}
+          />
+              
+          <Route
             path="/destinations/:destinationId/attractions/"
             element={<AttractionList />}
           />
@@ -63,6 +82,7 @@ const App = () => {
         ) }
 
       </Routes>
+
     </>
   );
 };
