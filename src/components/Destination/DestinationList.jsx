@@ -13,7 +13,7 @@ const DestinationList = () => {
     const navigate = useNavigate()
     useEffect(() => {
       const fetchDestination = async () => {
-        const fetcedDestination = await destinatioService.index(tripId)
+        const fetcedDestination = await destinationService.index(tripId)
         console.log("fetched Destination", fetcedDestination)
         setDestination(fetcedDestination)
       }
@@ -23,7 +23,7 @@ const DestinationList = () => {
     <main>
     <button onClick={() => navigate("/:tripId/destinations/new")}>Add Attraction</button>
     {destination.length === 0 ? (
-      <p>No </p>
+      <p>No destination  </p>
     ) : (
       <ul>
         {destination.map((dest) => (
