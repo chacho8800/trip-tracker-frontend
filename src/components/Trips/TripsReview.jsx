@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import * as tripService from "../../services/tripService"; // make sure tripService has an addReview function
+import * as tripService from "../../services/tripService";
 
 const GiveReviewForm = () => {
   const { tripId } = useParams();
@@ -19,10 +19,11 @@ const GiveReviewForm = () => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     try {
+      console.log("Submitting review for trip:", tripId, formData);
       await tripService.addReview(tripId, formData);
-      navigate(`/trips/${tripId}`); 
+      navigate(`/trips/${tripId}`);
     } catch (err) {
-      console.error(err);
+      console.error("Failed to submit review:", err);
       setMessage("Failed to submit review.");
     }
   };

@@ -21,7 +21,7 @@ const EditTripForm = () => {
         setFormData({
           travelers: trip.travelers,
           trip_duration: trip.trip_duration,
-          startDate: trip.startDate.slice(0,10), // format for date input
+          startDate: trip.startDate.slice(0,10), 
           endDate: trip.endDate.slice(0,10),
         });
       } catch (err) {
@@ -39,12 +39,14 @@ const EditTripForm = () => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     try {
-      const updatedTrip = await tripService.update(tripId, formData);
+      const updatedTrip = await tripService.update(tripId, {
+        ...formData,
+        trip_duration: formData.trip_duration.toString(),
+        });;
       console.log("Updating Form Data", formData)
       setTrips([updatedTrip, ...trips])
-      // stop from here ......
       
-      navigate(`/trips/${tripId}`); // redirect to trip details after update
+      navigate(`/trips/${tripId}`); 
     } catch (err) {
       console.error(err);
       setMessage('Failed to update trip.');
@@ -59,7 +61,7 @@ const EditTripForm = () => {
         <div>
           <label htmlFor="travelers">Trip Name:</label>
           <input
-            type="text"
+            type="string"
             id="travelers"
             name="travelers"
             value={formData.travelers}
