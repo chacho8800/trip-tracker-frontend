@@ -43,8 +43,8 @@ const TripsDashboard = () => {
           trips.map((trip) => (
             <li key={trip._id}>
               <button onClick={() => handleViewTrip(trip._id)}>
-                <strong>Travelers:</strong> {trip.travelers} | <strong>Duration:</strong> {trip.trip_duration} days
-              </button>
+                <strong>Trip Name:</strong> {trip.travelers} 
+                </button>
               {/* <Link to={`/trips/${tripid}`}>
                 {attraction.name} — Posted by {user.firstName} {user.lastName}
               </Link> */}
