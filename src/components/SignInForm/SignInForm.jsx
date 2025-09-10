@@ -24,7 +24,7 @@ const SignInForm = () => {
     try {
       const signedInUser = await signIn(formData);
       setUser(signedInUser);
-      navigate('/');
+      navigate('/trips');
     } catch (err) {
       setMessage(err.message);
     }

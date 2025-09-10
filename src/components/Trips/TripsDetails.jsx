@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import * as tripService from "../../services/tripService";
+import * as destinationService from "../../services/destinationService"
 
 const TripDetails = () => {
   const [trip, setTrip] = useState(null);
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
-  const { tripId } = useParams();
+  const { tripId, destinationId } = useParams();
 
   useEffect(() => {
     const fetchTrip = async () => {
@@ -21,6 +22,7 @@ const TripDetails = () => {
     };
     fetchTrip();
   }, [tripId]);
+
 
   const handleEdit = () => {
     navigate(`/trips/${tripId}/edit`);

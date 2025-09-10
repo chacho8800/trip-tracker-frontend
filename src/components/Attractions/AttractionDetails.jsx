@@ -28,24 +28,32 @@ const AttractionDetails = () => {
     }
 
   return (
-    <main>
-        <article>
-            <h2>{attractions.name}</h2>
-            <p>Rating: {attractions.rating}</p>
-            <img src={attractions.img} alt={attractions.name} />
-            <p>Created at: {new Date(attractions.createdAt).toLocaleDateString()}</p>
+<main>
+  <article>
+    <h2>{attractions.name}</h2>
+    <p>Rating: {attractions.rating}</p>
+    <img src={attractions.img} alt={attractions.name} />
+    <p>
+      Created at:{" "}
+      {new Date(attractions.createdAt).toLocaleDateString()}
+    </p>
 
+    {attractions.attractionreviews && attractions.attractionreviews.length > 0 && (
+      <section style={{ marginTop: "1rem" }}>
+
+        <h3>Reviews:</h3>
         <ul>
-            {attractions.attractionReviews.length === 0 ? (
-            <li>No reviews yet</li>
-            ) : (
-            attractions.attractionReviews.map((review) => (
-            <li key={review._id}>{review.comment}</li>
-          ))
-        )}
+          {attractions.attractionreviews.map((review) => (
+            <li key={review._id}>
+              <strong>Rating:</strong> {review.rating} / 5 <br />
+              <strong>Comment:</strong> {review.comment}
+            </li>
+          ))}
         </ul>
-        </article>
-    </main>
+      </section>
+    )}
+  </article>
+</main>
   )
 }
 

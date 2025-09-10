@@ -30,7 +30,7 @@ const SignUpForm = () => {
       const newUser = await signUp(formData);
       console.log("New user", newUser)
       setUser(newUser);
-      navigate('/');
+      navigate('/trips');
     } catch (err) {
       setMessage(err.message);
     }

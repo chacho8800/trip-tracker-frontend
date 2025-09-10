@@ -5,12 +5,13 @@ import * as attractionService from "../../services/attractionService.js"
 
 
 const AttractionList = () => {
-    const { destinationId } = useParams();
     const { user } = useContext(UserContext)
 
     const [attractions, setAttractions] = useState([])
 
     const navigate = useNavigate()
+
+    const { destinationId, attractionId, tripId} = useParams()
   
     useEffect(() => {
       const fetchAttractions = async () => {
@@ -25,7 +26,7 @@ const AttractionList = () => {
 
   return (
     <main>
-    <button onClick={() => navigate("/destinations/:destinationId/attractions/new")}>Add Attraction</button>
+    <button onClick={() => navigate(`/trips/${tripId}/destinations/${destinationId}/attractions/new`)}>Add Attraction</button>
 
     {attractions.length === 0 ? (
       <p>No attractions found.</p>

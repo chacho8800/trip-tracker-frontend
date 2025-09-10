@@ -1,61 +1,68 @@
-import { useState } from 'react'
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import * as tripService from "../../services/tripService";
 
-const ReviewForm = ({handleAddReview}) => {
+const GiveReviewForm = () => {
+  const { destinationId, attractionId } = useParams();
+  const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
-        rating: "",
-        comment: "",
-    })
+  const [formData, setFormData] = useState({
+    rating: "",
+    comment: "",
+  });
+  const [message, setMessage] = useState("");
 
-    const handleChange = (e) => {
-        setFormData({...formData, [e.target.name] : e.target.value})
+  const handleChange = (evt) => {
+    setFormData({ ...formData, [evt.target.name]: evt.target.value });
+  };
+
+  const handleSubmit = async (evt) => {
+    evt.preventDefault();
+    try {
+      console.log("Submitting review for attraction:",formData);
+      await tripService.addReview(destinationId, attractionId, formData);
+      navigate(`/destinations/${destinationId}/attractions/${attractionId}}}`);
+    } catch (err) {
+      console.error("Failed to submit review:", err);
+      setMessage("Failed to submit review.");
     }
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
-        // add review to db
-        handleAddReview(formData)
-        setFormData({
-            rating: "",
-            comment: ""
-        })
-    }
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
-        <label htmlFor="rating">Rating:</label>
-        <select 
-        name="rating"
-        id="rating"
-        value={formData.rating}
-        onChange={handleChange}
-        >
+    <main>
+      <h1>Give a Review</h1>
+      {message && <p style={{ color: "red" }}>{message}</p>}
+      <form onSubmit={handleSubmit} autoComplete="off">
+        <div>
+          <label htmlFor="rating">Rating (1-5):</label>
+          <input
+            type="number"
+            id="rating"
+            name="rating"
+            min="1"
+            max="5"
+            value={formData.rating}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="comment">Comment:</label>
+          <textarea
+            id="comment"
+            name="comment"
+            value={formData.comment}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <button type="submit">Submit Review</button>
+          <button type="button" onClick={() => navigate(`/trips/${tripId}`)}>Cancel</button>
+        </div>
+      </form>
+    </main>
+  );
+};
 
-        <option value=""></option>
-            <option value="1">⭐</option>
-            <option value="2">⭐⭐</option>
-            <option value="3">⭐⭐⭐</option>
-            <option value="4">⭐⭐⭐⭐</option>
-            <option value="5">⭐⭐⭐⭐⭐</option>
-        </select>
-
-        <br />
-
-        <label htmlFor="comment">Comment:</label>
-        <textarea 
-        name="comment"
-        id="comment"
-        value={formData.comment}
-        onChange={handleChange}
-        rows={3}
-        cols={30}
-        ></textarea>
-        <br />
-        
-        <button type='submit'> Submit Review </button>
-    </form>
-  )
-}
-
-export default ReviewForm
+export default GiveReviewForm;

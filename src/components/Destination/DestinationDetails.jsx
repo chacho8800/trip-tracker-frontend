@@ -46,22 +46,25 @@ const DestinationDetails = () => {
         </header>
         <p>{destination.text}</p>
       </section>
-      <section>
-        <h2>Comments</h2>
+      <main>
+        <article>
+            <h2>{attractions.name}</h2>
+            <p>Rating: {attractions.rating}</p>
+            <img src={attractions.img} alt={attractions.name} />
+            <p>Created at: {new Date(attractions.createdAt).toLocaleDateString()}</p>
 
-        <CommentForm handleAddDiscription={handleAddDiscription} />
+        <ul>
+            {attractions.attractionReviews.length === 0 ? (
+            <li>No reviews yet</li>
+            ) : (
+            attractions.attractionReviews.map((review) => (
+            <li key={review._id}>{review.comment}</li>
+          ))
+        )}
+        </ul>
+        </article>
+    </main>
 
-        {!destination.discription.length && <p>There are no comments</p>}
-
-        {destination.discription.map(discription => {
-            return <article>
-                <header>
-                    <p>{`${destination.author.username} posted on ${new Date(discription.createdAt).toLocaleDateString()}`}</p>
-                </header>
-                <p>{discription.text}</p>
-            </article>
-        })}
-      </section>
     </main>
   );
 };

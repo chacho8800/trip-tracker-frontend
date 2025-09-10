@@ -1,17 +1,20 @@
 import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { UserContext } from '../../contexts/UserContext';
+import * as destinationService from '../../services/destinationService.js';
 
 const DestinationForm = () => {
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
-  const [Destination, setDestination] = useState([]);
+  const { user } = useContext(UserContext);
+  const { tripId } = useParams(); // grab tripId from URL
   const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     country: '',
-    city: "",
-    description: "",
+    city: '',
+    description: '',
   });
+
+  const [destination, setDestination] = useState([])
 
   const { country, city, description } = formData;
 
@@ -23,10 +26,10 @@ const DestinationForm = () => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     try {
-      const newDestination = await create(formData);
-      console.log("New Destination", newDestination)
-      setTrips(newDestination);
-      navigate('/trips/:tripId/destinations');
+      const newDestination = await destinationService.create(tripId, formData);
+      console.log('New Destination', newDestination);
+      setDestination([newDestination, ...destination])
+      navigate(`/trips/${tripId}/destinations`);
     } catch (err) {
       setMessage(err.message);
     }
@@ -49,30 +52,30 @@ const DestinationForm = () => {
           />
         </div>
         <div>
-          <label htmlFor="city">City:</label>
-          <input 
-          type="text"
-          id='city'
-          name='city'
-          value={city}
-          onChange={handleChange}
-          required
+          <label htmlFor='city'>City:</label>
+          <input
+            type='text'
+            id='city'
+            name='city'
+            value={city}
+            onChange={handleChange}
+            required
           />
         </div>
         <div>
-        <label htmlFor="description">Tell us how your current destination is!:</label>
-          <input 
-          type="text"
-          id='description'
-          name='description'
-          value={description}
-          onChange={handleChange}
-          required
+          <label htmlFor='description'>Tell us about this destination:</label>
+          <input
+            type='text'
+            id='description'
+            name='description'
+            value={description}
+            onChange={handleChange}
+            required
           />
         </div>
         <div>
-          <button>Create Destination</button>
-          <button onClick={() => navigate('/trips')}>Cancel</button>
+          <button type='submit'>Create Destination</button>
+          <button type='button' onClick={() => navigate('/trips')}>Cancel</button>
         </div>
       </form>
     </main>

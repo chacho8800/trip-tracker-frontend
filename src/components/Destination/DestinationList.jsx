@@ -21,19 +21,25 @@ const DestinationList = () => {
     }, [user])
   return (
     <main>
-    <button onClick={() => navigate("/:tripId/destinations/new")}>Add Attraction</button>
     {destination.length === 0 ? (
       <p>No destination  </p>
     ) : (
       <ul>
         {destination.map((dest) => (
           <li key={dest._id}>
-            <Link to={`/${tripId}/destinations/${destinationId}/`}>
-            <h3>  Country:{dest.country}
-            </h3>
-            </Link>
+            <h3>{dest.city}, {dest.country}</h3>
+            <p>{dest.description}</p>
+    
+      <button onClick={() => navigate(`/trips/${tripId}/destinations/${dest._id}/attractions/new`)}>
+        Add Attraction
+      </button>
+
           </li>
+
+
+          
         ))}
+
       </ul>
     )}
   </main>

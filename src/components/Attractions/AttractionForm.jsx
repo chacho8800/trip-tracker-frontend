@@ -8,7 +8,7 @@ const AttractionForm = () => {
 
     const navigate = useNavigate()
 
-    const { destinationId } = useParams()
+    const { destinationId, tripId } = useParams()
 
     const [formData, setFormData] = useState({
         name: "",
@@ -27,7 +27,7 @@ const AttractionForm = () => {
         setAttractions([newAttraction, ...attractions])
 
         console.log("Attraction Form Data", newAttraction)
-        navigate(`/destinations/${destinationId}/attractions`)
+        navigate(`/trips/${tripId}/destinations/${destinationId}/attractions`)
     }
 
     const handleSubmit = (event) => {

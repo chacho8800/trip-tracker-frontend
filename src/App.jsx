@@ -17,7 +17,7 @@ import TripsDetails from './components/Trips/TripsDetails';
 import TripsEdit from './components/Trips/TripsEdit';
 import TripsReview from './components/Trips/TripsReview';
 
-import AttractionList from './components/Attractions/AttractionList.jsx';
+import AttractionList from './components/Attractions/attractionList.jsx';
 import AttractionDetails from './components/Attractions/AttractionDetails.jsx';
 import AttractionForm from './components/Attractions/AttractionForm.jsx';
 
@@ -42,12 +42,12 @@ const App = () => {
         <Route path='/trips/:tripId/edit' element={<TripsEdit />} />
         <Route path='/trips/:tripId/reviews' element={<TripsReview />} />
           <Route
-            path="/:tripId/destinations"
+            path="/trips/:tripId/destinations"
             element={<DestinationList />}
           />
               
           <Route
-            path="/:tripId/destinations/new"
+            path="/trips/:tripId/destinations/new"
             element={<DestinationForm />}
           />
               
@@ -57,12 +57,12 @@ const App = () => {
           />
               
           <Route
-            path="/destinations/:destinationId/attractions/"
+            path="/trips/:tripId/destinations/:destinationId/attractions/"
             element={<AttractionList />}
           />
 
           <Route
-            path="/destinations/:destinationId/attractions/new"
+            path="/trips/:tripsId/destinations/:destinationId/attractions/new"
             element={<AttractionForm />}
           />
 
