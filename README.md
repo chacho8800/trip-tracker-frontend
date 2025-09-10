@@ -1,19 +1,35 @@
-# React JWT Auth Template
+# Trip Tracker Frontend
 
-## About
+This is the frontend application for the Trip Tracker app, built with **React**, **React Router**, and **Fetch API** for communicating with the backend. Users can log trips, add destinations, review trips, and see attractions.
 
-This repo is a React JWT Auth template meant to be paired with a back-end app utilizing JWT tokens.
+---
 
-## Getting started
+## Table of Contents
+- [Technologies](#technologies)
+- [Installation](#installation)
+- [Environment Variables](#environment-variables)
+- [Starting the App](#starting-the-app)
+- [Folder Structure](#folder-structure)
+- [Available Pages](#available-pages)
+- [Services](#services)
+- [Authentication](#authentication)
+- [License](#license)
 
-Fork and clone this repository to your local machine.
+---
 
-After moving into the cloned directory, run `npm i` to download the dependencies.
+## Technologies
+- React 18+
+- React Router DOM
+- Fetch API
+- Context API (for user authentication state)
+- Vite (for development)
 
-Create a `.env` file in the root of the project and add the following:
+---
 
-```plaintext
-VITE_BACK_END_SERVER_URL=http://localhost:3000
-```
+## Installation
 
-Start the app with `npm run dev`.
+1. Clone the repository:
+
+```bash
+git clone https://github.com/adamzhujiang/trip-tracker-frontend.git
+cd trip-tracker-frontend
