@@ -1,136 +1,93 @@
-
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/trips`;
 
 // Create a new trip
-const  create = async (tripData) =>  {
-  try {
-    const response = await fetch(BASE_URL,{
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(tripData)
-    });
-    
-    const data = await response.json()
+export const create = async (tripData) => {
+  const response = await fetch(BASE_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+    body: JSON.stringify(tripData),
+  });
 
-    if(data.err) throw new Error(data.err)
-
-    return data
-
-  } catch (error) {
-    console.log(error)
-    throw new Error
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || 'Failed to create trip');
   }
-}
 
-// Get all trips
-export async function getAll() {
-  try {
-    const response = await fetch(BASE_URL, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-    const data = await response.json()
+  return response.json();
+};
 
-    if(data.err) throw new Error(data.err)
+// Update an existing trip
+export const update = async (tripId, tripData) => {
+  const response = await fetch(`${BASE_URL}/${tripId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+    body: JSON.stringify(tripData),
+  });
 
-    return data
-
-  } catch (error) {
-    console.log(error)
-    throw new Error
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || 'Failed to update trip');
   }
-}
 
-// Get a single trip by id
-export async function getById(tripId) {
-  try {
-    const response = await fetch(`${BASE_URL}/${tripId}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
-    const data = await response.json()
-
-    if(data.err) throw new Error(data.err)
-
-    return data
-
-  } catch (error) {
-    console.log(error)
-    throw new Error
-  }
-}
-
-// Update a trip
-const update = async (id, tripData) => {
-  try {
-    const response = await fetch(`${BASE_URL}/${id}`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(tripData)
-    })
-    const data = await response.json()
-
-    if(data.err) throw new Error(data.err)
-
-    return data
-
-  } catch (error) {
-    console.log(error)
-    throw new Error
-  }
-}
+  return response.json();
+};
 
 // Delete a trip
-export async function remove(id) {
-  try {
-    const response = await fetch(`${BASE_URL}/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-    const data = await response.json()
+export const deleteTrip = async (tripId) => {
+  const response = await fetch(`${BASE_URL}/${tripId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  });
 
-    if(data.err) throw new Error(data.err)
-
-    return data
-
-  } catch (error) {
-    console.log(error)
-    throw new Error
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || 'Failed to delete trip');
   }
-}
 
-export async function addReview(tripId, reviewData) {
-  try {
-    const response = await fetch(`${BASE_URL}/${tripId}/reviews`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(reviewData)
-    });
-    const data = await response.json()
+  return response.json();
+};
 
-    if(data.err) throw new Error(data.err)
+// Get all trips
+export const getAll = async () => {
+  const response = await fetch(BASE_URL, {
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+  });
+  if (!response.ok) throw new Error('Failed to fetch trips');
+  return response.json();
+};
 
-    return data
+// Get a single trip by ID
+export const getById = async (tripId) => {
+  const response = await fetch(`${BASE_URL}/${tripId}`, {
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+  });
+  if (!response.ok) throw new Error('Failed to fetch trip');
+  return response.json();
+};
 
-  } catch (error) {
-    console.log(error)
-    throw new Error
+// Add a review to a trip
+export const addReview = async (tripId, reviewData) => {
+  const response = await fetch(`${BASE_URL}/${tripId}/reviews`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify(reviewData),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || "Failed to add review");
   }
-}
 
-export {
-  create,
-  update,
-}
+  return response.json();
+};
