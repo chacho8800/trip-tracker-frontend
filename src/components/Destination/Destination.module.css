@@ -1,0 +1,111 @@
+/* Page + destination section */
+.page {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  color: #212121;
+}
+
+.topSection {
+  margin-bottom: 2rem;
+}
+
+.header {
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.country {
+  letter-spacing: 2px;
+  color: #546e7a;
+  margin: 0 0 0.25rem 0;
+}
+
+.city {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0d47a1;
+  margin: 0;
+}
+
+.meta {
+  color: #607d8b;
+  margin-top: 0.4rem;
+  font-size: 0.95rem;
+}
+
+.btn {
+  padding: 0.45rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #cfd8dc;
+  background: #f5f8fa;
+  cursor: pointer;
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+
+.text {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: #333;
+}
+
+.attractionsMain {
+  margin-top: 1.5rem;
+}
+
+.attractionCard {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.attractionTitle {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #0d47a1;
+  margin: 0 0 .5rem 0;
+}
+
+.attractionMeta {
+  color: #607d8b;
+  margin: .25rem 0;
+  font-size: .95rem;
+}
+
+.attractionImage {
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  margin: 0.75rem 0 1rem 0;
+}
+
+/* Reviews */
+.reviewList {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+}
+
+.emptyReview {
+  color: #78909c;
+  font-style: italic;
+  background: #fafafa;
+  border: 1px dashed #ccd6dd;
+  padding: .75rem;
+  border-radius: 8px;
+}
+
+.reviewItem {
+  background: #f9fbff;
+  border: 1px solid #e3e8ef;
+  padding: .75rem;
+  border-radius: 8px;
+  margin-bottom: .6rem;
+  color: #333;
+}
