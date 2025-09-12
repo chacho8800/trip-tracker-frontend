@@ -1,8 +1,9 @@
-const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/auth`;
+const BASE_URL = import.meta.env.VITE_BACK_END_SERVER_URL; 
+console.log('BASE_URL:', BASE_URL);
 
 const signUp = async (formData) => {
   try {
-    const res = await fetch(`${BASE_URL}/sign-up`, {
+    const res = await fetch(`${BASE_URL}/auth/sign-up`, { 
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -10,9 +11,7 @@ const signUp = async (formData) => {
 
     const data = await res.json();
 
-    if (data.err) {
-      throw new Error(data.err);
-    }
+    if (data.err) throw new Error(data.err);
 
     if (data.token) {
       localStorage.setItem('token', data.token);
@@ -21,14 +20,14 @@ const signUp = async (formData) => {
 
     throw new Error('Invalid response from server');
   } catch (err) {
-    console.log(err);
-    throw new Error(err);
+    console.error(err);
+    throw err;
   }
 };
 
 const signIn = async (formData) => {
   try {
-    const res = await fetch(`${BASE_URL}/sign-in`, {
+    const res = await fetch(`${BASE_URL}/auth/sign-in`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -36,9 +35,7 @@ const signIn = async (formData) => {
 
     const data = await res.json();
 
-    if (data.err) {
-      throw new Error(data.err);
-    }
+    if (data.err) throw new Error(data.err);
 
     if (data.token) {
       localStorage.setItem('token', data.token);
@@ -47,12 +44,9 @@ const signIn = async (formData) => {
 
     throw new Error('Invalid response from server');
   } catch (err) {
-    console.log(err);
-    throw new Error(err);
+    console.error(err);
+    throw err;
   }
 };
 
-export {
-  signUp,
-  signIn,
-};
+export { signUp, signIn };
