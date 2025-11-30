@@ -35,10 +35,19 @@ We built this project not only to create a clean travel dashboard but also to pr
 
 👉 https://traveltriptracker.netlify.app/
 
-## Installation
+# Installation
 
 1. Clone the repository:
 
 ```bash
+# Clone the repository
 git clone https://github.com/chacho8800/trip-tracker-frontend.git
+
+# Enter the project folder
 cd trip-tracker-frontend
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm start
