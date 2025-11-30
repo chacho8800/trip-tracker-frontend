@@ -1,10 +1,30 @@
-# 🌍 Travel Trip Tracker
+# 🌍 Travel Trip Tracker — Full-Stack Project
 
-A simple and elegant web app to help you track, view, and organize all your trips in one place.
+Travel Trip Tracker is a full-stack web application designed to help users easily track, organize, and view their travel plans in one simple dashboard. Whether you’re looking at past trips or planning new ones, the app delivers a smooth, clean, and organized experience across both frontend and backend systems.
 
 # ✨ Overview
 
-Travel Trip Tracker provides a clean dashboard that displays all your travel plans at a glance. Whether you’re tracking past trips or planning new ones, the app gives you a smooth and organized experience.
+The app provides a modern, card-based dashboard that displays all trips at a glance. Users can view destinations, dates, and details through a clean and intuitive interface.
+
+# 🧩 What I Built
+
+This is a full-stack project, split into two main parts:
+
+# 🔹 Frontend (React)
+ 
+### Repository: https://github.com/chacho8800/trip-tracker-frontend
+-	Responsive UI built with React
+-	Clean dashboard to display all trips
+-	Smooth user experience with organized card layouts
+-	Modern styling and intuitive navigation
+
+# 🔹 Backend (Node.js / MongoDB)
+
+### Repository: https://github.com/chacho8800/trip-tracker-backend
+-   RESTful API that manages all trip data
+-   Endpoints for creating, reading, updating, and deleting trips
+-	MongoDB database for storing trip information
+-	Secure, scalable structure for future features (auth, user profiles, etc.)
 
 # 🚀 Features
 -	📌 All Trips Dashboard – See every trip in a clean, card-based layout
@@ -26,10 +46,12 @@ We worked together on planning, UI/UX design, component structure, and feature d
 
 We built this project not only to create a clean travel dashboard but also to practice real-world teamwork and code collaboration.
 
-# 🛠️ Tech Stack
--	HTML, CSS, JavaScript
--	React 
--   Netlify
+# ⚙️ Tech Stack
+
+- Frontend: React, JavaScript, CSS
+- Backend: Node.js
+- Database: MongoDB / Mongoose
+- Deployment: Netlify (frontend), Heroku (backend)
 
 # 🔗 Live Demo
 
@@ -41,7 +63,7 @@ We built this project not only to create a clean travel dashboard but also to pr
 
 ```bash
 # Clone the repository
-git clone https://github.com/chacho8800/trip-tracker-frontend.git
+git clone https://github.com/chacho8800/trip-tracker-frontend
 
 # Enter the project folder
 cd trip-tracker-frontend
